@@ -5,6 +5,13 @@ import GlobalState from "../core/state/GlobalState";
 async function bootstrap() {
 	await DataServices.init();
 	await GlobalState.init();
+
+	try {
+		await import("../core/material/MaterialElements");
+	} catch (error) {
+		console.warn("Material Web components failed to load; rendering the app with native fallback markup.", error);
+	}
+
 	document.querySelector<HTMLDivElement>("#app")!.replaceChildren(new App());
 }
 
