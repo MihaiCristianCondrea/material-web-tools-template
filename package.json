@@ -12,5 +12,8 @@
 		"typescript": "^4.6.4",
 		"vite": "^6.4.3"
 	},
-	"description": "A lightweight TypeScript, SCSS, and HTML template for building small Material Design web tools."
+	"description": "A lightweight TypeScript, SCSS, and HTML template for building small Material Design web tools.",
+	"dependencies": {
+		"@material/web": "^2.3.0"
+	}
 }

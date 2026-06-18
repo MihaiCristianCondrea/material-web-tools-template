@@ -1,4 +1,3 @@
-import "../core/material/MaterialElements";
 import WebComponent from "../core/webcomponents/WebComponent";
 import ExampleFeature from "../features/example-feature/presentation/ExampleFeature";
 import html from "./App.html?raw";
