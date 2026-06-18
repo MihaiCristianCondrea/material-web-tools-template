@@ -7,6 +7,7 @@ This repo contains a basic template for working with Web Components in Typescrip
 Web Components allow you to create custom HTML elements that can be used in your web pages. This starter template contains basic classes to work with them. The template is:
 
 - ⚛️ Modular:
+- 
   - write HTML, CSS, and TypeScript in separate files
   - Models and ViewModels, keep the state separate from the DOM
 - 🪶 Minimal:
