@@ -33,10 +33,14 @@ export default class State<T> extends Observable {
 	}
 
 	private _setValue(value: T): void {
-		this._value = typeof value == "object" ? this._createProxy(value) : value;
+		this._value = this._isProxyable(value) ? this._createProxy(value) : value;
 	}
 
-	private _createProxy(value: Object): T {
+	private _isProxyable(value: unknown): value is object {
+		return value !== null && typeof value == "object";
+	}
+
+	private _createProxy(value: object): T {
 		return new Proxy(value, this._proxyHandler) as T;
 	}
 
@@ -57,10 +61,8 @@ export default class State<T> extends Observable {
 
 			const prop = object[key];
 			if (typeof prop == "undefined") return;
-			else if (!prop.isProxy) {
-				if (typeof prop == "object") {
-					return this._createProxy(prop);
-				}
+			else if (this._isProxyable(prop) && !(prop as any).isProxy) {
+				return this._createProxy(prop);
 			}
 
 			return prop;
