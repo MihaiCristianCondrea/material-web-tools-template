@@ -9,12 +9,12 @@
 
 export default abstract class WebComponent extends HTMLElement {
 	html: string;
-	css: string;
+	styles: string;
 
-	protected constructor(html?: string, css?: string) {
+	protected constructor(html?: string, styles?: string) {
 		super();
 		this.html = html ?? "";
-		this.css = css ?? "";
+		this.styles = styles ?? "";
 		this.attachShadow({ mode: "open" });
 	}
 
@@ -55,9 +55,9 @@ export default abstract class WebComponent extends HTMLElement {
 	}
 
 	loadStylesheet() {
-		if (this.css !== "") {
+		if (this.styles !== "") {
 			const style = document.createElement("style");
-			style.innerHTML = this.css;
+			style.innerHTML = this.styles;
 			this.root.appendChild(style);
 		}
 	}

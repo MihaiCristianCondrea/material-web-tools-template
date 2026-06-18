@@ -1,0 +1,17 @@
+{
+	"name": "Material Web Tools Template",
+	"short_name": "MW Tools",
+	"description": "A lightweight TypeScript, SCSS, and HTML template for building small Material Design web tools.",
+	"start_url": "/material-web-tools-template/",
+	"scope": "/material-web-tools-template/",
+	"display": "standalone",
+	"background_color": "#fffbff",
+	"theme_color": "#6750A4",
+	"icons": [
+		{
+			"src": "icon.svg",
+			"sizes": "any",
+			"type": "image/svg+xml"
+		}
+	]
+}

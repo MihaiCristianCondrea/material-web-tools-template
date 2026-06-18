@@ -1,0 +1,45 @@
+:host {
+	display: block;
+}
+
+.example-feature {
+	background: color-mix(in srgb, var(--md-sys-color-surface-container-high) 72%, white);
+	border: 1px solid var(--md-sys-color-outline-variant);
+	border-radius: 28px;
+	display: grid;
+	gap: 1.25rem;
+	padding: clamp(1.25rem, 4vw, 2rem);
+}
+
+.eyebrow {
+	color: var(--md-sys-color-primary);
+	font-size: 0.8rem;
+	font-weight: 800;
+	letter-spacing: 0.1em;
+	margin: 0 0 0.5rem;
+	text-transform: uppercase;
+}
+
+h2,
+p {
+	margin: 0;
+}
+
+h2 {
+	font-size: clamp(1.8rem, 4vw, 3rem);
+	line-height: 1;
+}
+
+#example-feature-body,
+.example-feature__count {
+	color: var(--md-sys-color-on-surface-variant);
+	line-height: 1.6;
+}
+
+#example-feature-body {
+	margin-top: 0.75rem;
+}
+
+md-filled-button {
+	justify-self: start;
+}

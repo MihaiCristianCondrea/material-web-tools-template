@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-labelledby="title desc">
+  <title id="title">Material Web Tools Template logo</title>
+  <desc id="desc">Layered purple cards forming a tool spark.</desc>
+  <rect width="512" height="512" rx="112" fill="#6750A4"/>
+  <path fill="#EADDFF" d="M132 150c0-22 18-40 40-40h168c22 0 40 18 40 40v24H132v-24Z"/>
+  <path fill="#D0BCFF" d="M96 222c0-22 18-40 40-40h240c22 0 40 18 40 40v42H96v-42Z"/>
+  <path fill="#FFFFFF" d="M72 310c0-22 18-40 40-40h288c22 0 40 18 40 40v52c0 22-18 40-40 40H112c-22 0-40-18-40-40v-52Z"/>
+  <path fill="#6750A4" d="M274 304l18 40 44 5-33 29 9 43-38-22-38 22 9-43-33-29 44-5 18-40Z"/>
+</svg>
