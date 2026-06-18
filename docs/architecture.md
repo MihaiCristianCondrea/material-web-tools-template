@@ -1,60 +1,61 @@
 # Architecture
 
-`github-dev-tools` is a Vite-built GitHub Pages application implemented as native web components. The app follows a layered structure so UI code, GitHub API access, domain formatting rules, and reusable infrastructure stay separated.
+Material Web Tools Template is a Vite app built with native web components, TypeScript, SCSS, and a small Material-styled startup page.
+
+## Goals
+
+- Keep the starter understandable for small tools.
+- Provide one generic example feature that can be renamed.
+- Keep Material Web setup centralized.
+- Keep GitHub Pages deployment working with a repository base path.
 
 ## Runtime boot path
 
-1. `src/main.ts` starts the app through `src/app/App.ts`.
-2. `src/app/App.ts` imports the GitHub Tools app shell, imports bundled Material Web registrations, renders a loading state, initializes shared data/state services, and mounts `<github-tools-app>` into `#app`.
-3. `src/core/material/MaterialElements.ts` is the only project file that imports Material Web element definitions. Importing that module registers the `md-*` custom elements through the Vite bundle.
-4. `src/features/github-tools/presentation/GitHubToolsApp.ts` owns top-level navigation, the drawer, shared layout, favorites wiring, and tool switching.
-5. Tool actions call GitHub Tools core services plus tool-specific domain helpers, then render results back into the app shell template.
+1. `src/main.ts` imports `src/app/main.ts`.
+2. `src/app/main.ts` initializes services and state, then mounts `<material-tools-app>`.
+3. `src/app/App.ts` imports `src/core/material/MaterialElements.ts`, which registers the Material elements used by the app.
+4. `src/app/App.ts` renders the startup page and mounts `ExampleFeature`.
+5. `ExampleFeature` reads a tiny domain use case, shows text, and increments a click count when the button is pressed.
 
-## Source layers
+## Source layout
 
-### `src/core`
+```text
+src/app
+```
 
-Core code provides reusable app-wide foundations that are not specific to GitHub tools:
+The composition root. Put startup code, service wiring, and the top-level app shell here.
 
-- `events/` contains observable/event utilities.
-- `material/` contains the bundled Material Web registration boundary.
-- `state/` contains global state, state wrappers, and the base model helper.
-- `typings/` contains project-level TypeScript declarations.
-- `webcomponents/` contains reusable native custom-element helpers and loading utilities.
+```text
+src/core
+```
 
-### `src/features/github-tools`
+Reusable code that is not owned by one feature:
 
-The GitHub Tools feature group contains the GitHub-focused app shell, shared GitHub logic, and the current tool domains.
+- `events/` for event and observable helpers.
+- `material/` for centralized Material Web custom-element registration.
+- `state/` for model/state helpers.
+- `typings/` for Vite and raw asset declarations.
+- `webcomponents/` for the base native custom-element helper and optional loader.
 
-- `presentation/GitHubToolsApp.ts`, `.html`, and `.css` define the shell/coordinator for navigation, drawer behavior, shared layout, and current tool views.
-- `core/models/` contains shared GitHub models such as repository, commit, and favorite repository references.
-- `core/services/` contains shared GitHub parsing and API-client logic used by multiple tools.
-- `core/components/` is reserved for shared GitHub Tools UI components when views are split out of the app shell.
-- `tools/repo-mapper/` contains Repo Mapper-specific domain code, including repository-tree models and map formatting.
-- `tools/release-stats/` contains Release Stats-specific domain models.
-- `tools/git-patch/` contains Git Patch-specific domain models.
+```text
+src/features/example-feature
+```
 
-This first-pass structure intentionally keeps the existing app behavior centralized in `GitHubToolsApp` while moving obvious shared and tool-specific files to their future homes. Future UI refactors should move feature-specific rendering into smaller panels such as `MapperPanel`, `ReleaseStatsPanel`, `PatchPanel`, and `FavoritesPanel` without turning the feature group into a mini-framework.
+The only starter feature. It is intentionally small and generic:
 
-### Other features
+- `domain/` contains the example message type and use case.
+- `presentation/` contains the web component, HTML template, and SCSS.
 
-- `src/features/app-showcase/` owns the promoted apps section shown on the home view.
-- `src/features/favorites/` remains a cross-feature persistence package. It currently stores GitHub repository favorites in `localStorage` and imports shared repository types from `src/features/github-tools/core/models/Repository.ts`.
+Rename `example-feature` when you start a real project. Add a `data/` folder only when the feature needs API access, local storage, DTOs, or mappers.
 
-### `src/app`
+## Styling rule
 
-`src/app/DataServices.ts` wires the data adapters and use cases used by the app shell. It is the integration point for the GitHub API client, favorites persistence, and promoted apps.
+Application styles should be SCSS. Component SCSS is imported with `?raw` and injected into the component shadow root by `WebComponent`.
 
-## Product flows
+## Adding a small tool
 
-The UI exposes three primary tools:
-
-- **Repo Mapper** accepts a GitHub repository URL, an optional token, and an output format, then renders either an ASCII directory tree or a flat path list.
-- **Release Stats** accepts a GitHub repository URL and renders total downloads, per-release totals, and asset-level download counts.
-- **Git Patch** accepts a GitHub commit URL and returns the commit patch text for download or copying.
-
-Favorites are shared across Repo Mapper and Release Stats, saved locally, and shown both on the Favorites page and as home-screen shortcuts.
-
-## Custom-element registration rules
-
-Custom elements are global to the page. A tag name can only be registered once, and the same constructor cannot be reused for multiple tag names. For that reason, project code must not define fake `md-*` elements as a production fallback and must not load the same Material Web element graph from multiple runtime CDNs. Material registrations belong in `src/core/material/MaterialElements.ts` and should stay as bundled imports.
+1. Rename `src/features/example-feature` to match your tool.
+2. Rename `ExampleFeature` and its HTML/SCSS files.
+3. Replace the example domain use case with your first real action.
+4. Register any new Material elements in `src/core/material/MaterialElements.ts`.
+5. Add `.gitkeep` files only for intentionally empty directories that document future architecture.

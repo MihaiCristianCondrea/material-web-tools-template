@@ -1,36 +1,49 @@
-# Typescript Web Components starter template
+# Material Web Tools Template
 
-This repo contains a basic template for working with Web Components in Typescript.
+A lightweight TypeScript, SCSS, and HTML template for building small Material Design web tools.
 
-## Features
+The repo is intentionally simple: native web components, Vite, Material component examples, SCSS component styles, and one rename-friendly example feature.
 
-Web Components allow you to create custom HTML elements that can be used in your web pages. This starter template contains basic classes to work with them. The template is:
+## What is included
 
-- ⚛️ Modular:
-- 
-  - write HTML, CSS, and TypeScript in separate files
-  - Models and ViewModels, keep the state separate from the DOM
-- 🪶 Minimal:
-  - no external dependencies, only Vite and vanilla TypeScript
-- 💪 Powerful:
-  - pubSub pattern for event handling and communication
+- TypeScript application bootstrapping in `src/app`.
+- Shared web-component, state, event, and Material registration utilities in `src/core`.
+- One small `example-feature` module with a text block and button interaction.
+- SVG favicon/app icon, web app manifest, and SEO metadata.
+- GitHub Pages deployment workflow configured for the `material-web-tools-template` repository path.
 
-## Documentation:
+## Project structure
 
--> see [📖 Documentation](docs/documentation.md)
+```text
+src/
+├── app/                  # bootstrap, composition root, and app shell
+├── core/                 # reusable events, state, Material, typings, web components
+└── features/
+    └── example-feature/  # rename this for your first real tool
+```
 
-## Setup
+## Development
 
-1. use the template to create your own repo
-2. clone your repo
-3. run `npm install`
+```bash
+npm install
+npm run dev
+```
 
-### Development
+## Build
 
-1. run `npm run dev`
-2. make changes to the code
+```bash
+npm run build
+npm run preview
+```
 
-### Build preview
+The Vite base path is `/material-web-tools-template/`, so the production build works when published as a GitHub Pages project site.
 
-1. run `npm run build`
-2. run `npm run preview` and open the preview in a browser
+## Architecture notes
+
+- Keep runtime source in `src/`.
+- Keep Material custom-element registration centralized in `src/core/material/MaterialElements.ts`.
+- Use `.scss` for component styling; avoid new plain `.css` application styles.
+- Use `?raw` when importing SCSS into a shadow-root component.
+- Rename `src/features/example-feature` when you create your first real tool.
+
+Read more in [`docs/architecture.md`](docs/architecture.md).

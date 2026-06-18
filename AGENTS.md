@@ -14,7 +14,7 @@ Rules for `references/`:
 - Do not import, bundle, or execute code from `references/`.
 - Do not copy reference code blindly into application source.
 - Use the folder only to inspect implementation patterns and component APIs.
-- Consume Material Web components through npm imports from `@material/web`.
+- Consume Material Web components through npm imports from `@material/web` when the package is available to the project.
 
 ## Material Web imports
 
@@ -22,14 +22,12 @@ Keep Material Web custom element registration centralized in `src/core/material/
 
 ## Material Web styling
 
-Do not override Material Web component structure, sizing, shape, padding, borders, typography, cursor, ripple, icon placement, disabled behavior, or animation in application CSS. Prefer component attributes and slots, and limit CSS customization on Material Web components to supported color/design tokens unless a documented accessibility or layout exception is required.
+Do not override Material Web component structure, sizing, shape, padding, borders, typography, cursor, ripple, icon placement, disabled behavior, or animation in application SCSS. Prefer component attributes and slots, and limit CSS customization on Material Web components to supported color/design tokens unless a documented accessibility or layout exception is required.
 
-## GitHub Tools feature structure
+## Feature structure
 
-The GitHub developer tools live under `src/features/github-tools/`:
+Keep template examples generic and rename-friendly. New example functionality should live under `src/features/example-feature/` unless it is truly app-wide infrastructure.
 
-- `presentation/GitHubToolsApp.ts/html/css` is the shell for navigation, drawer state, shared layout, favorites wiring, and current tool switching.
-- `core/models/`, `core/services/`, and `core/components/` hold GitHub Tools code shared by multiple tools.
-- `tools/repo-mapper/`, `tools/release-stats/`, and `tools/git-patch/` hold tool-specific data, domain, and presentation code.
-
-When adding GitHub-focused functionality, prefer placing shared GitHub parsing/client/model code in `github-tools/core` and tool-only behavior in the matching `github-tools/tools/<tool-name>` package. Keep truly app-wide utilities in `src/core`, and keep favorites in `src/features/favorites` unless they become private to GitHub Tools.
+- `domain/` holds small models and use cases.
+- `presentation/` holds web components, HTML templates, and SCSS.
+- Add `data/` only when the feature needs a repository, API adapter, DTO, mapper, or persistence example.
